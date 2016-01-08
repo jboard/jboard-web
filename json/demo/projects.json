@@ -1,15 +1,15 @@
 [
   {
-    "title": "Mokation",
+    "title": "Project 1",
     "color": "#FFBF00",
-    "price": 23
+    "price": 30
   },
   {
-    "title": "Inobox",
+    "title": "Project 2",
     "color": "#23EA15"
   },
   {
-    "title": "Blitz",
+    "title": "Project 3",
     "color": "#EFF700"
   }
 ]

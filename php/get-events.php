@@ -1,4 +1,5 @@
 <?php
+include_once 'config.php';
 
 //--------------------------------------------------------------------------------------------------
 // This script reads event data from a JSON file and outputs those events which are within the range
@@ -30,7 +31,7 @@ if (isset($_GET['timezone'])) {
 }
 
 // Read and parse our events JSON file into an array of event data arrays.
-$json = file_get_contents(dirname(__FILE__) . '/../json/events.json');
+$json = file_get_contents($_CONFIG['json_events']);
 $input_arrays = json_decode($json, true);
 
 // Accumulate an output array of event data arrays.

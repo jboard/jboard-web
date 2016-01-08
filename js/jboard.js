@@ -34,7 +34,6 @@ $(document).ready(function() {
 	}
 	
 	$('#calendar').fullCalendar({
-		//theme: true,
 		header: {
 			left: 'prev,next today',
 			center: 'title',
@@ -42,15 +41,10 @@ $(document).ready(function() {
 		},
 		defaultTimedEventDuration: '03:00:00',
 		eventOrder: 'id',
-		//allDayDefault: false,
-		//forceEventDuration: true,
 		lang: 'pt-br',
 		timezone: 'America/Sao_Paulo',
 		editable: true,
 		droppable: true, // this allows things to be dropped onto the calendar
-		drop: function(date, jsEvent, ui, resourceId) {
-			// console.log(date);
-		},
 		eventRender: function(event, element) {
             element.append( "<span class='closeon' title='Retirar post-it'> &nbsp; X &nbsp; </span>" );
             element.find(".closeon").click(function() {
@@ -64,33 +58,24 @@ $(document).ready(function() {
                 
             });
         },
-        
-		eventReceive: function(e) {
+        eventReceive: function(e) {
 			e.id = $.now();
 			data = {
 				title	:e.title,
 				start	:e.start.format(),
-				//end		:e.end.format(),
 				color	:e.color,
 				id		:e.id
 			};
 			post_events(data);
 		},
-		eventDragStop: function( e, jsEvent, ui, view ) { 
-			//pass
-		},
 		eventDrop: function( e, delta, revertFunc, jsEvent, ui, view ) {
 			data = {
 				title:		e.title,
 				start:		e.start.format(),
-				//end:		e.end.format(),
 				color:		e.color,
 				id:			e.id
 			};
 			post_events(data);
-		},
-		eventResizeStop: function( e, jsEvent, ui, view ) { 
-			//pass
 		},
 		eventResize: function( e, delta, revertFunc, jsEvent, ui, view ) {
 			data = {
@@ -105,9 +90,6 @@ $(document).ready(function() {
 		eventLimit: true, // allow "more" link when too many events
 		events: {
 			url: 'php/get-events.php',
-			data: function () {
-				//$('.fc-event').remove();
-			},
 			error: function() {
 				$('#script-warning').show();
 			}

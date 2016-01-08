@@ -1,6 +1,8 @@
 <?php
+include_once 'config.php';
+
 // Read and parse our events JSON file into an array of event data arrays.
-$json = file_get_contents(dirname(__FILE__) . '/../json/events.json');
+$json = file_get_contents($_CONFIG['json_events']);
 $input_arrays = json_decode($json, true);
 
 $input_arrays = array_filter($input_arrays, function ($v) use ($_POST) {
@@ -13,4 +15,4 @@ if (! isset($_POST['delete'])){
 
 $json = json_encode($input_arrays);
 
-file_put_contents(dirname(__FILE__) . '/../json/events.json',$json);
+file_put_contents($_CONFIG['json_events'],$json);
