@@ -52,7 +52,7 @@ $(document).ready(function() {
 			// console.log(date);
 		},
 		eventRender: function(event, element) {
-            element.append( "<span class='closeon' title='Retirar postit!'> &nbsp; X &nbsp; </span>" );
+            element.append( "<span class='closeon' title='Retirar post-it'> &nbsp; X &nbsp; </span>" );
             element.find(".closeon").click(function() {
             	$.post('php/post-events.php', {id:event.id, delete:1})
             	.done(function(data){
@@ -120,7 +120,7 @@ $(document).ready(function() {
 	/* GET Projects */
 	$.get('php/get-projects.php', function(data,status){
 		$(data).each(function(k,v){
-			html = '<div class="fc-event" style="background-color: ' + v.color + '"> ' + v.title + ' </div>';
+			html = '<div class="fc-event post-it" style="background-color: ' + v.color + '"> ' + v.title + ' </div>';
 			$('#external-events').append(html);
 		});
 	})
