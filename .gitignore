@@ -1,1 +1,5 @@
 .project
+
+# PRODUCTION FILES
+php/config.production.php
+json/production
