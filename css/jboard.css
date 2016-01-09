@@ -80,15 +80,10 @@ body {
 	z-index: 10;
 }
 
+
+/* POST-IT STYLES (by http://webdesignandsuch.com/create-a-post-it-note-with-css3/) */
+
 .post-it {
-	/*
-	background: #fefabc;
-	-moz-transform: rotate(7deg);
-	-webkit-transform: rotate(7deg);
-	-o-transform: rotate(7deg);
-	-ms-transform: rotate(7deg);
-	transform: rotate(7deg);
-	 */
 	border: none !important;
 	border-radius: 0 !important;
 	padding: 15px;
@@ -112,3 +107,5 @@ body {
 	-ms-transform: rotate(7deg);
 	transform: rotate(7deg);
 }
+
+/* END POST-IT STYLES */
