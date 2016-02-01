@@ -16,23 +16,39 @@ $(document).ready(function() {
 			center : 'title',
 			right : 'month,agendaWeek,agendaDay'
 		},
-		defaultTimedEventDuration : '03:00:00',
+		allDayDefault: true,
+		//defaultTimedEventDuration : '03:00:00',
 		eventOrder : 'id',
+		/*
+		eventOrder : function (a,b) {
+			return parseInt(a.id) - parseInt(b.id);
+		},
+		*/
 		lang : 'pt-br',
 		timezone : 'America/Sao_Paulo',
 		editable : true,
 		droppable : true,
 		eventLimit : true, // allow "more" link when too many events
-		/*
-		 events: function () {
 
-		 }*/
-		events : {
-			url : 'php/get-events.php',
-			error : function() {
-				$('#script-warning').show();
-			}
+		events : function(start, end, timezone, callback) {
+			$.ajax({
+				url : 'php/get-events.php',
+				dataType : 'json',
+				data : {
+					start : start.format(),
+					end : end.format(),
+					timezone : timezone
+				},
+				success : function(data) {
+					callback(data.events);
+					console.log(data.details);
+				},
+				error : function() {
+					$('#script-warning').show();
+				}
+			});
 		},
+
 		loading : function(bool) {
 			$('#loading').toggle(bool);
 		},
@@ -105,4 +121,4 @@ $(document).ready(function() {
 		console.log("error to read projects");
 	});
 
-}); 
+});

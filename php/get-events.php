@@ -34,18 +34,36 @@ if (isset($_GET['timezone'])) {
 $json = file_get_contents($_CONFIG['json_events']);
 $input_arrays = json_decode($json, true);
 
+$return = array('details'=>array());
+
 // Accumulate an output array of event data arrays.
 $output_arrays = array();
 foreach ($input_arrays as $array) {
-
-	// Convert the input array into a useful Event object
+    
+    // Convert the input array into a useful Event object
 	$event = new Event($array, $timezone);
 
 	// If the event is in-bounds, add it to the output
 	if ($event->isWithinDayRange($range_start, $range_end)) {
 		$output_arrays[] = $event->toArray();
+        
+        
+        if (isset($array['price_per_hour'])) {
+            $total = $array['price_per_hour'] * $array['hours_per_postit'];
+            if (array_key_exists($array['title'], $return['details'])) {
+                if ($array['price_per_hour'])
+                    $return['details'][$array['title']]['total'] += $total;
+            }
+            else {
+                $price_per_hour = ($total) ? : 0;
+                $return['details'][$array['title']] = array('total'=>$price_per_hour);
+            }
+        }
+        
 	}
 }
 
+$return['events'] = $output_arrays;
+
 // Send JSON to the client.
-echo json_encode($output_arrays);
+echo json_encode($return);
